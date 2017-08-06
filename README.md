@@ -1,13 +1,7 @@
-Role Name
-=========
+Oracle EE 11g
+=============
 
-A brief description of the role goes here.
-
-Requirements
-------------
-
-
-
+Simplifyed Oracle 11g EE install role
 
 Role Variables
 --------------
