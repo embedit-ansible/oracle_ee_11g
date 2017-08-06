@@ -1,0 +1,16 @@
+- name: Ensure IPv6 hostname
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^::1'
+    line: "::1 localhost oracle {{ oracle_hostname }}"
+    owner: root
+    group: root
+    mode: 0644
+- name: Ensure IPv4 hostname
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.0\.1'
+    line: "127.0.0.1 localhost oracle {{ oracle_hostname }}"
+    owner: root
+    group: root
+    mode: 0644

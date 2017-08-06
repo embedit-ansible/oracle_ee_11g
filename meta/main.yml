@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Mario Vejlupek
+  description: Install Oracle 11g EE
+  issue_tracker_url: https://github.com/embedit-ansible/oracle_ee_11g/issues
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+    - name: EL
+      versions:
+        - 7
+  galaxy_tags:
+    - oracle
+    - install
+    - 11g
+dependencies:
+  - embedit-ansible.oracle-tools-create_restore_point

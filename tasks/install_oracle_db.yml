@@ -1,0 +1,47 @@
+- name: Add oracle response file
+  template:
+    src: templates/db.rsp.j2
+    dest:  /home/oracle/db.rsp
+    owner: oracle
+    group: oinstall
+    mode: 0600
+- name: Ensure present temp dir
+  file:
+    path: /home/oracle/tmp/ # TODO: Make a var
+    state: directory
+    owner: oracle
+    group: oinstall
+- name: Unarchive install files 1of2
+  unarchive:
+    src: "{{oracle_install_files_dir}}/linux.x64_11gR2_database_1of2.zip"
+    dest: /home/oracle/tmp/ # TODO: Make a var
+    owner: oracle
+    group: oinstall
+    creates: /home/oracle/tmp/database/runInstaller
+- name: Unarchive install files 2of2
+  unarchive:
+    src: "{{oracle_install_files_dir}}/linux.x64_11gR2_database_2of2.zip"
+    dest: /home/oracle/tmp/ # TODO: Make a var
+    owner: oracle
+    group: oinstall
+    creates: /home/oracle/tmp/database/stage/Components/oracle.ctx/11.2.0.1.0/1/DataFiles/filegroup1.jar
+- name: Run Oracle Install
+  command: /home/oracle/tmp/database/runInstaller -silent -waitforcompletion -responseFile /home/oracle/db.rsp -ignoreSysPrereqs
+  become: true
+  become_user: oracle
+  ignore_errors: True # TODO: resolve failing issues
+  #register: fail_me
+  #failed_when: "fail_me.rc != 0 and fail_me.rc != -3"
+- name: Run Oracle post Install
+  command: /home/oracle/app/oracle/product/11.2.0/dbhome_1/root.sh
+- name: Configure systemd
+  template:
+    src: templates/systemd-dbora.service.j2
+    dest:  /etc/systemd/system/dbora.service
+    owner: root
+    group: wheel
+    mode: 0644
+- name: Enable oracle database service
+  service:
+    name: dbora
+    enabled: yes

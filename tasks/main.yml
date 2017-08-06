@@ -1,0 +1,11 @@
+---
+- include: cleanup_prev_install.yml
+  when: oracle_clean_install
+- include: prepare_system_environment.yml
+- include: create_oracle_user.yml
+- include: prepare_oracle_environment.yml
+- include: install_oracle_db.yml
+- name: Create Restore Point
+  include_role:
+    name: embedit-ansible.oracle-tools-create_restore_point
+  when: restore_point_name

@@ -1,0 +1,27 @@
+- name: Install common packages RHEL7
+  yum: name={{ item }} state=installed
+  with_items: "{{ common_packages_el7 }}"
+
+- name: Add variables file
+  template:
+    src: templates/oracle.sh.j2
+    dest: /etc/profile.d/oracle.sh
+    owner: root
+    group: wheel
+    mode: 0644
+- name: Add sysctl file
+  template:
+    src: templates/sysctl-oracle.conf.j2
+    dest:  /etc/sysctl.d/oracle.conf
+    owner: root
+    group: wheel
+    mode: 0644
+- name: Apply sysctl changes
+  command: /sbin/sysctl -p
+- name: Add limits file
+  template:
+    src: templates/limits-oracle.conf.j2
+    dest:  /etc/security/limits.d/oracle.conf
+    owner: root
+    group: wheel
+    mode: 0644

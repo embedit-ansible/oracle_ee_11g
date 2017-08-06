@@ -1,0 +1,14 @@
+- name: Create User group
+  group:
+    name: oinstall
+    state: present
+- name: Create DBA group
+  group:
+    name: dba
+    state: present
+- name: Create DBA user
+  user:
+    name: oracle
+    comment: "Oracle DBA Account"
+    group: oinstall
+    groups: dba

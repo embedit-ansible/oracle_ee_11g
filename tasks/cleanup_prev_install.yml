@@ -1,0 +1,8 @@
+- name: Ensure clean install by removing oratab
+  file:
+    path: /etc/oratab
+    state: absent
+- name: Ensure clean install by removing install dir
+  file:
+    path: /home/oracle/app # TODO: Make a var
+    state: absent
