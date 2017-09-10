@@ -2,12 +2,12 @@
 export TMP=/home/oracle/tmp/
 
 export ORACLE_HOSTNAME={{ oracle_hostname }}
-export ORACLE_UNQNAME=orcl
+export ORACLE_UNQNAME={{ oracle_sid }}
 export ORACLE_APP=/home/oracle/app
 export ORACLE_BASE=$ORACLE_APP/oracle
 export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/dbhome_1
 
-export ORACLE_SID=orcl
+export ORACLE_SID={{ oracle_sid }}
 
 PATH=/usr/sbin:$PATH:$ORACLE_HOME/bin
 

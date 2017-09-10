@@ -12,5 +12,3 @@ galaxy_info:
     - oracle
     - install
     - 11g
-dependencies:
-  - embedit-ansible.oracle-tools-create_restore_point

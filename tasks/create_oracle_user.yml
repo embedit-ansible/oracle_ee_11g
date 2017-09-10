@@ -12,3 +12,9 @@
     comment: "Oracle DBA Account"
     group: oinstall
     groups: dba
+- name: Ensure home dir permissions
+  file:
+    path: /home/oracle
+    owner: oracle
+    group: oinstall
+    state: directory
